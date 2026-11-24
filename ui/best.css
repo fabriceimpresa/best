@@ -1,0 +1,407 @@
+@charset "utf-8";
+/* =====================================================================
+   BEST - grafica (23/11/2026). Dark, high-tech vivo, tocco gotico solo nel marchio.
+   Gira in Chrome (finestra app); solo CSS standard, cosi' un domani va anche su Safari.
+   Colori: nero caldo #050304 - oro/ambra #ffb000 - cremisi #e0263c - acciaio - verde spia #5dff9a.
+   I colori di ogni gioco arrivano da giochi.js (campo "colore") e sono messi dal codice (ui/best.js).
+   ===================================================================== */
+
+@font-face { font-family: 'Grenze Gotisch'; font-style: normal; font-weight: 700; src: url(fonts/GrenzeGotisch-700.woff) format('woff'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 500; src: url(fonts/Rajdhani-500.woff) format('woff'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 600; src: url(fonts/Rajdhani-600.woff) format('woff'); }
+@font-face { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; src: url(fonts/Rajdhani-700.woff) format('woff'); }
+@font-face { font-family: 'Chakra Petch'; font-style: normal; font-weight: 400; src: url(fonts/ChakraPetch-400.woff) format('woff'); }
+@font-face { font-family: 'Chakra Petch'; font-style: normal; font-weight: 600; src: url(fonts/ChakraPetch-600.woff) format('woff'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; src: url(fonts/JetBrainsMono-400.woff) format('woff'); }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+html { background: #050304; }
+body { position: relative; background: #050304; color: #f2ece2; font: 400 15px/1.45 'Chakra Petch', 'Segoe UI', sans-serif; cursor: default; -ms-user-select: none; user-select: none; }
+button { font-family: inherit; color: inherit; margin: 0; outline: 0; }
+button::-moz-focus-inner { border: 0; }
+
+/* ---------- strati di fondo ---------- */
+#fondo { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 0; }
+#ambiente { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+#ambiente div { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.1s ease; }
+#ambiente div.su { opacity: 1; }
+#vis, #giochi { position: absolute; left: 24px; right: 24px; top: 84px; bottom: 0; }
+#vis { z-index: 2; }
+#braci { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+#giochi { z-index: 4; }
+#righe { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 20; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255,236,206,.024) 0, rgba(255,236,206,.024) 1px, transparent 1px, transparent 3px); }
+#vignetta { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 19; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 46%, transparent 58%, rgba(0,0,0,.5) 100%); }
+#sipario { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 40; pointer-events: none; background: #020101; opacity: 0; }
+#sipario i { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: linear-gradient(90deg, transparent, #ffb000 20%, #fff 50%, #e0263c 80%, transparent); box-shadow: 0 0 26px 5px rgba(255,160,40,.75); }
+.fx-pieni.entra #sipario { animation: sipario 1.25s ease both; }
+.fx-pieni.entra #sipario i { animation: riga-crt 1.25s cubic-bezier(.5,0,.2,1) both; }
+@keyframes sipario { 0% { opacity: 1; } 48% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes riga-crt { 0% { transform: scaleX(0) scaleY(1); opacity: 0; } 10% { opacity: 1; } 40% { transform: scaleX(1) scaleY(1); opacity: 1; } 56% { transform: scaleX(1) scaleY(4); opacity: 1; } 100% { transform: scaleX(1) scaleY(16); opacity: 0; } }
+
+/* ---------- testata ---------- */
+#testata { position: absolute; left: 0; right: 0; top: 0; height: 84px; z-index: 5; }
+.marchio { position: absolute; left: 26px; top: 12px; height: 60px; }
+.sigillo { position: absolute; left: 0; top: 3px; width: 54px; height: 54px; }
+.sigillo .an { position: absolute; left: 0; top: 0; width: 54px; height: 54px; }
+.sigillo svg { display: block; width: 54px; height: 54px; }
+.sigillo .an1 { animation: gira 46s linear infinite; }
+.sigillo .an2 { animation: gira-contro 27s linear infinite; }
+.sigillo .cuore { position: absolute; left: 22px; top: 22px; width: 10px; height: 10px; background: #ffb000; transform: rotate(45deg); box-shadow: 0 0 10px 2px rgba(255,176,0,.8); animation: batte 2.8s ease-in-out infinite; }
+@keyframes gira { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes gira-contro { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes batte { 0%, 100% { opacity: .55; box-shadow: 0 0 6px 1px rgba(255,176,0,.5); } 50% { opacity: 1; box-shadow: 0 0 14px 4px rgba(255,176,0,.95); } }
+.nome { position: absolute; left: 70px; top: -5px; font: 700 56px/1 'Grenze Gotisch', 'Rajdhani', 'Segoe UI', serif; color: #f6c765; letter-spacing: 3px; white-space: nowrap;
+  text-shadow: 0 0 2px rgba(255,236,190,.9), 0 0 18px rgba(255,160,30,.55), 0 0 44px rgba(224,38,60,.4); }
+.fx-pieni.entra .nome { animation: tubo 1.3s steps(1, end) .35s backwards; }
+.nome.sfarfalla { animation: tubo-breve .5s steps(1, end) 1; }
+@keyframes tubo { 0% { opacity: 0; } 8% { opacity: .9; } 12% { opacity: .1; } 20% { opacity: .75; } 26% { opacity: .25; } 38% { opacity: 1; } 46% { opacity: .6; } 60%, 100% { opacity: 1; } }
+@keyframes tubo-breve { 0% { opacity: 1; } 12% { opacity: .35; } 24% { opacity: 1; } 40% { opacity: .6; } 55%, 100% { opacity: 1; } }
+.filo { position: absolute; left: 252px; right: 236px; top: 42px; height: 1px; background: linear-gradient(90deg, rgba(255,176,0,.6), rgba(255,255,255,.1) 28%, rgba(255,255,255,.1) 72%, rgba(224,38,60,.6)); }
+.filo i { position: absolute; top: -1px; left: -12%; width: 90px; height: 3px; background: linear-gradient(90deg, transparent, #ffcf6b, #fff); opacity: 0; animation: corri 7s cubic-bezier(.5,0,.3,1) 1.6s infinite; }
+.filo b { position: absolute; top: -3px; width: 7px; height: 7px; background: #ffb000; transform: rotate(45deg); box-shadow: 0 0 8px rgba(255,176,0,.9); }
+.filo b.f1 { left: -3px; } .filo b.f2 { right: -3px; background: #e0263c; box-shadow: 0 0 8px rgba(224,38,60,.9); }
+@keyframes corri { 0% { left: -12%; opacity: 0; } 6% { opacity: 1; } 58% { left: 100%; opacity: 1; } 64%, 100% { left: 104%; opacity: 0; } }
+.orologio { position: absolute; right: 28px; top: 15px; text-align: right; }
+.orologio b { display: block; font: 400 31px/1 'JetBrains Mono', Consolas, monospace; letter-spacing: 3px; color: #fbe9c6; text-shadow: 0 0 16px rgba(255,160,30,.55); }
+.orologio b i { font-style: normal; animation: lampeggia 1.6s steps(1, end) infinite; }
+@keyframes lampeggia { 0% { opacity: 1; } 50% { opacity: .25; } 100% { opacity: 1; } }
+.orologio span { display: block; margin-top: 7px; font: 600 11.5px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 3.4px; color: #8f867c; text-transform: uppercase; }
+
+/* ---------- piede ---------- */
+#piede { position: absolute; left: 28px; right: 110px; bottom: 12px; z-index: 5; pointer-events: none; overflow: hidden; white-space: nowrap;
+  font: 400 10.5px/1 'JetBrains Mono', Consolas, monospace; letter-spacing: 1.6px; color: rgba(214,200,180,.5); text-transform: uppercase; }
+#piede b { font-weight: 400; color: rgba(255,176,0,.55); margin: 0 10px; }
+
+/* ====================================================================
+   I MONOLITI (strato visivo, #vis): un pannello per gioco.
+   Posizione e larghezza le mette disponi() in ui/best.js.
+   ==================================================================== */
+.mono { position: absolute; top: 0; bottom: 0; transition: left .72s cubic-bezier(.22,.9,.24,1), width .72s cubic-bezier(.22,.9,.24,1); }
+.fx-pieni.entra .mono { animation: sorgi 1.05s cubic-bezier(.22,.9,.24,1) backwards; }
+@keyframes sorgi { 0% { opacity: 0; transform: translateY(54px) scaleY(.88); } 34% { opacity: 1; } 46% { opacity: .4; } 58% { opacity: 1; } 100% { opacity: 1; transform: translateY(0) scaleY(1); } }
+.galla { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.fx-pieni .mono.chiusa .galla { animation: galla 9s ease-in-out infinite; }      /* i monoliti chiusi galleggiano di pochi pixel sopra il pavimento */
+@keyframes galla { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.alone { position: absolute; left: 0; right: 0; top: 0; bottom: 92px; opacity: 0; transition: opacity .45s ease; }
+.mono.sopra .alone { opacity: .75; }
+.mono.aperta .alone { opacity: 1; }
+.corpo { position: absolute; left: 0; right: 0; top: 0; bottom: 92px; overflow: hidden; background: #0b0808; }
+.pos { position: absolute; transition: left .72s cubic-bezier(.22,.9,.24,1); }
+.par { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transition: transform .6s ease-out; }
+.img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat; transform: scale(1.06); }
+.fx-pieni .corpo .img { animation: respiro 26s ease-in-out infinite alternate; }
+@keyframes respiro { 0% { transform: scale(1.06) translate(0, 0); } 100% { transform: scale(1.13) translate(-1.1%, -.8%); } }
+.tinta, .velo, .velo2, .trama, .spento, .bordo { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.velo { background: linear-gradient(180deg, rgba(5,3,4,.34) 0%, rgba(5,3,4,0) 22%, rgba(5,3,4,0) 40%, rgba(5,3,4,.6) 64%, rgba(5,3,4,.95) 100%); transition: opacity .6s ease; }
+.velo2 { opacity: 0; transition: opacity .6s ease;
+  background: linear-gradient(90deg, rgba(5,3,4,.96) 0%, rgba(5,3,4,.88) 22%, rgba(5,3,4,.5) 42%, rgba(5,3,4,0) 62%), linear-gradient(180deg, rgba(5,3,4,.4) 0%, rgba(5,3,4,0) 20%, rgba(5,3,4,0) 74%, rgba(5,3,4,.5) 100%); }
+.mono.aperta .velo { opacity: 0; }
+.mono.aperta .velo2 { opacity: 1; }
+.trama { background: repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0, rgba(0,0,0,.2) 1px, transparent 1px, transparent 3px); }
+.fx-pieni .trama { animation: trama 1.4s linear infinite; }
+@keyframes trama { from { background-position: 0 0; } to { background-position: 0 6px; } }
+.spento { background: #050304; opacity: .2; transition: opacity .45s ease; }
+.mono.sopra .spento, .mono.aperta .spento { opacity: 0; }
+.conSopra .mono .spento { opacity: .5; }
+.conSopra .mono.sopra .spento { opacity: 0; }
+.mono.costa .spento { opacity: .5; }
+.mono.costa.sopra .spento { opacity: .12; }
+.bordo { border: 1px solid rgba(255,255,255,.13); z-index: 2; transition: border-color .4s ease; }
+.mono.sopra .bordo, .mono.aperta .bordo { border-color: rgba(255,255,255,.3); }
+.lin { position: absolute; left: 0; right: 0; top: 0; height: 2px; z-index: 3; opacity: .5; transition: opacity .4s ease; }
+.mono.sopra .lin, .mono.aperta .lin { opacity: 1; }
+.scia { position: absolute; top: 0; left: -16%; width: 15%; height: 2px; z-index: 4; opacity: 0; }
+.scia.giu { top: auto; bottom: 0; }
+.scia.corre { animation: scia 1.1s cubic-bezier(.5,0,.3,1) 1; }
+@keyframes scia { 0% { left: -16%; opacity: 0; } 12% { opacity: 1; } 86% { opacity: 1; } 100% { left: 101%; opacity: 0; } }
+.ang { position: absolute; width: 26px; height: 26px; z-index: 3; border: 0 solid #ffb000; opacity: .85; transition: all .35s cubic-bezier(.2,.9,.25,1.15); }
+.ang.a1 { left: 14px; top: 32px; border-left-width: 2px; border-top-width: 2px; }
+.ang.a2 { right: 14px; bottom: 14px; border-right-width: 2px; border-bottom-width: 2px; }
+.mono.sopra .ang.a1, .mono.aperta .ang.a1 { left: 9px; top: 27px; width: 34px; height: 34px; opacity: 1; }
+.mono.sopra .ang.a2, .mono.aperta .ang.a2 { right: 9px; bottom: 9px; width: 34px; height: 34px; opacity: 1; }
+.mono.costa .ang { opacity: 0; }
+.tacche { position: absolute; right: 44px; top: 0; width: 118px; height: 6px; z-index: 3; opacity: .55;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.75) 0, rgba(255,255,255,.75) 1px, transparent 1px, transparent 8px); }
+.mono.costa .tacche { opacity: 0; }
+.tg { position: absolute; top: 0; width: 0; height: 0; border-style: solid; z-index: 5; }
+.tg1 { left: 0; border-width: 20px 20px 0 0; border-color: #050304 transparent transparent transparent; }
+.tg2 { right: 0; border-width: 0 20px 20px 0; border-color: transparent #050304 transparent transparent; }
+.dg { position: absolute; top: 10px; width: 30px; height: 1px; z-index: 6; background: rgba(255,255,255,.42); }
+.dg1 { left: -5px; transform: rotate(-45deg); }
+.dg2 { right: -5px; transform: rotate(45deg); }
+.lampo { position: absolute; top: 0; left: -30%; width: 22%; height: 100%; z-index: 1; opacity: 0; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,236,200,.16) 60%, rgba(255,255,255,.34) 100%); }
+.lampo.passa { width: 13%; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,240,214,.11) 50%, rgba(255,255,255,0)); transform: skewX(-13deg); animation: riflesso 2.4s ease-in-out 1; }
+@keyframes riflesso { 0% { left: -25%; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { left: 112%; opacity: 0; } }
+.mono.aperta .lampo { animation: lampo .95s cubic-bezier(.45,0,.25,1) .05s 1; }
+@keyframes lampo { 0% { left: -30%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: .8; } 100% { left: 108%; opacity: 0; } }
+.guasto { position: absolute; left: 0; right: 0; top: 40%; height: 2px; z-index: 1; opacity: 0; }
+.guasto.scossa { animation: scossa .2s steps(3, end) 1; }
+@keyframes scossa { 0% { opacity: 1; transform: translateX(-14px); } 50% { opacity: .5; transform: translateX(9px); } 100% { opacity: 0; transform: translateX(0); } }
+.riflesso { position: absolute; left: 0; right: 0; bottom: 0; height: 88px; overflow: hidden; opacity: .55; transition: opacity .5s ease; }
+.riflesso .pos { transform: scaleY(-1); }
+.riflesso .img { transform: none; animation: none !important; }
+.riflesso .sfuma { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(5,3,4,.5) 0%, rgba(5,3,4,.84) 42%, #050304 86%); }
+.mono.costa .riflesso { opacity: .3; }
+.base { position: absolute; left: 4%; right: 4%; bottom: 89px; height: 2px; opacity: .6; transition: opacity .4s ease; }
+.mono.sopra .base, .mono.aperta .base { opacity: 1; }
+.fx-pieni .mono.chiusa .base { animation: fiato 5.5s ease-in-out infinite; }      /* la luce alla base respira */
+@keyframes fiato { 0%, 100% { opacity: .4; } 50% { opacity: .95; } }
+
+/* ====================================================================
+   LE SCHEDE (strato dei comandi, #giochi): stesse misure dei monoliti.
+   chiusa = monolite in piedi - aperta = monolite spalancato - costa = monolite di lato
+   ==================================================================== */
+.scheda { position: absolute; top: 0; bottom: 92px; overflow: hidden; cursor: pointer; background-color: rgba(0,0,0,.004);
+  transition: left .72s cubic-bezier(.22,.9,.24,1), width .72s cubic-bezier(.22,.9,.24,1); }
+.scheda.aperta { cursor: default; }
+.fx-pieni.entra .scheda { animation: appare .8s ease backwards; }
+@keyframes appare { 0% { opacity: 0; } 100% { opacity: 1; } }
+.rapido .mono, .rapido .scheda, .rapido .pos, .rapido .logo { transition-duration: .4s; }
+.fisso .mono, .fisso .scheda, .fisso .pos, .fisso .logo { transition: none !important; }
+
+.num { position: absolute; left: 30px; top: 12px; font: 600 12px/1 'JetBrains Mono', Consolas, monospace; letter-spacing: 2px; color: rgba(255,255,255,.62); white-space: nowrap; transition: opacity .3s ease; }
+.num i { display: inline-block; width: 22px; height: 1px; margin: 0 0 4px 8px; background: rgba(255,255,255,.4); vertical-align: middle; }
+.scheda.costa .num i { display: none; }
+.scheda.costa .num { left: 0; right: 0; text-align: center; }
+.logo { position: absolute; display: block; border: 0; pointer-events: none;
+  transition: left .72s cubic-bezier(.22,.9,.24,1), top .72s cubic-bezier(.22,.9,.24,1), width .72s cubic-bezier(.22,.9,.24,1), opacity .35s ease; }
+.logo.titolo { font: 700 32px/1.08 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 3px; text-transform: uppercase; text-align: center; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.9); transition: left .72s cubic-bezier(.22,.9,.24,1), top .72s cubic-bezier(.22,.9,.24,1), opacity .35s ease; }
+.scheda.aperta .logo.titolo { text-align: left; }
+.scheda.costa .logo { opacity: 0; }
+.costola { position: absolute; left: 50%; top: 50%; width: 0; height: 0; opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+.costola span { position: absolute; left: -300px; top: -12px; width: 600px; height: 24px; text-align: center; white-space: nowrap; transform: rotate(-90deg);
+  font: 700 15px/24px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 6px; text-transform: uppercase; color: #f2ece2; text-shadow: 0 0 12px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.9); }
+.scheda.costa .costola { opacity: .92; transition-delay: .3s; }
+
+/* spia "in uso" (monolite chiuso e di lato) */
+.spia { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; white-space: nowrap; transition: opacity .3s ease; pointer-events: none; }
+.pill { display: inline-block; height: 38px; line-height: 36px; padding: 0 18px 0 14px; border: 1px solid rgba(93,255,154,.38); background: rgba(6,14,9,.62); }
+.pill .et { font: 600 11.5px/36px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 3px; text-transform: uppercase; color: #7fe7a6; margin-right: 12px; vertical-align: top; }
+.pill b { font: 700 19px/36px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 2px; text-transform: uppercase; color: #fff; vertical-align: top; }
+.led { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 13px 12px 0 0; vertical-align: top; background: #5dff9a; box-shadow: 0 0 8px #5dff9a, 0 0 18px rgba(93,255,154,.75); animation: spia 2.2s ease-in-out infinite; }
+@keyframes spia { 0%, 100% { box-shadow: 0 0 6px #5dff9a, 0 0 12px rgba(93,255,154,.5); } 50% { box-shadow: 0 0 10px #5dff9a, 0 0 26px rgba(93,255,154,.95); } }
+.spia.no .pill { border-color: rgba(255,84,104,.5); background: rgba(22,6,8,.66); }
+.spia.no .pill .et { color: #ff8a98; margin-right: 0; }
+.spia.nuovo .pill { border-color: rgba(255,255,255,.28); background: rgba(10,10,12,.6); }
+.spia.nuovo .pill .et { color: #d8d2c8; margin-right: 0; }
+.spia.nuovo .led { background: #9a948a; box-shadow: none; animation: none; }
+.no .led { background: #ff3b55; box-shadow: 0 0 8px #ff3b55, 0 0 18px rgba(255,59,85,.8); animation: allarme 1s steps(1, end) infinite; }
+@keyframes allarme { 0% { opacity: 1; } 50% { opacity: .25; } 100% { opacity: 1; } }
+.scheda.aperta .spia { opacity: 0; }
+.scheda.costa .pill { border-color: transparent; background: none; padding: 0; }
+.scheda.costa .pill .et, .scheda.costa .pill b { display: none; }
+.scheda.costa .led { margin-right: 0; }
+.invito { position: absolute; right: 54px; bottom: 21px; font: 600 12px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 5px; text-transform: uppercase; color: #fff; opacity: 0; transform: translateX(-10px); transition: opacity .3s ease, transform .3s ease; pointer-events: none; }
+.scheda.chiusa.sopra .invito { opacity: .95; transform: translateX(0); }
+
+/* ---------- scheda aperta: il quadro comandi ---------- */
+.gioco { display: none; position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.scheda.aperta .gioco { display: block; }
+.chiudi { position: absolute; right: 30px; top: 14px; width: 40px; height: 40px; padding: 0; background: rgba(8,5,5,.62); border: 1px solid rgba(255,255,255,.22); cursor: pointer; transition: border-color .2s ease, background-color .2s ease, transform .3s ease; }
+.chiudi svg { display: block; width: 14px; height: 14px; margin: 0 auto; }
+.chiudi:hover { border-color: #ffb000; background: rgba(255,176,0,.16); transform: rotate(90deg); }
+.colonna { position: absolute; left: 30px; top: 180px; bottom: 14px; width: 526px; overflow-y: auto; overflow-x: hidden; padding: 4px 18px 4px 16px; }
+.uso { height: 34px; margin-bottom: 14px; white-space: nowrap; }
+.uso .led { margin-top: 12px; }
+.uso .et { font: 600 12px/34px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 3px; text-transform: uppercase; color: #7fe7a6; margin-right: 12px; vertical-align: top; }
+.uso b { font: 700 20px/34px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 2px; text-transform: uppercase; color: #fff; vertical-align: top; }
+.uso.no { height: auto; white-space: normal; padding: 9px 14px 11px 12px; border: 1px solid rgba(255,84,104,.55); border-left: 3px solid #ff3b55; background: rgba(40,8,12,.72); }
+.uso.no .led { margin-top: 9px; }
+.uso.no .et { line-height: 28px; color: #ff8a98; margin-right: 0; }
+.uso.no .perche { display: block; font: 400 13.5px/1.4 'Chakra Petch', 'Segoe UI', sans-serif; color: #f0c9cd; margin-top: 2px; }
+.capo { font: 600 11.5px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 4.4px; text-transform: uppercase; color: #c9a45a; margin: 0 0 10px; white-space: nowrap; overflow: hidden; }
+.capo i { display: inline-block; width: 6px; height: 6px; margin: 0 10px 2px 0; background: #ffb000; transform: rotate(45deg); box-shadow: 0 0 8px rgba(255,176,0,.9); vertical-align: middle; }
+.capo b { display: inline-block; width: 300px; height: 1px; margin: 0 0 3px 12px; vertical-align: middle; background: linear-gradient(90deg, rgba(255,176,0,.6), rgba(255,176,0,0)); }
+
+.tasto { display: block; position: relative; width: 100%; padding: 0; margin: 0 0 8px; text-align: left; cursor: pointer; overflow: hidden; color: #f2ece2;
+  background: rgba(16,11,11,.8); border: 1px solid rgba(255,255,255,.14); border-left: 3px solid #7a7068;
+  transition: transform .18s ease, border-color .18s ease, background-color .18s ease, box-shadow .18s ease; }
+.tasto .dentro { display: flex; align-items: center; position: relative; height: 60px; padding: 0 14px 0 12px; }
+.tasto .play { flex: none; position: relative; width: 40px; height: 40px; margin-right: 15px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); background: rgba(255,255,255,.04); transition: all .18s ease; }
+.tasto .play svg { position: absolute; left: 14px; top: 11px; width: 14px; height: 16px; }
+.tasto .play path { fill: #f2ece2; }
+.tasto .tx { flex: 1 1 auto; min-width: 0; }
+.tasto .nome2 { display: block; font: 700 22px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 2.2px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tasto .breve { display: block; margin-top: 4px; font: 500 13.5px/1.1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: .4px; color: #a99f94; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tasto .tag { flex: none; margin-left: 10px; font: 600 11px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 2.4px; text-transform: uppercase; white-space: nowrap; }
+.tasto .tag .led { width: 8px; height: 8px; margin: 1px 8px 0 0; }
+.tasto .luce { position: absolute; top: 0; left: -45%; width: 38%; height: 100%; background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.13), rgba(255,255,255,0)); transform: skewX(-18deg); transition: left .55s ease; }
+.tasto .mir { position: absolute; width: 12px; height: 12px; border: 0 solid #fff; opacity: 0; transition: all .22s cubic-bezier(.2,.9,.25,1.15); }
+.tasto .m1 { right: 16px; top: 14px; border-top-width: 2px; border-right-width: 2px; }
+.tasto .m2 { right: 16px; bottom: 14px; border-bottom-width: 2px; border-right-width: 2px; }
+.tasto:hover .mir { opacity: .9; }
+.tasto:hover .m1 { right: 5px; top: 5px; }
+.tasto:hover .m2 { right: 5px; bottom: 5px; }
+.tasto .carica { position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #ffb000, #fff); transform: scaleX(0); transform-origin: 0 50%; }
+.tasto:hover { transform: translateX(5px); border-color: #ffb000; border-left-color: #ffb000; background-color: rgba(52,34,10,.86); box-shadow: 0 0 26px -6px rgba(255,176,0,.75); }
+.tasto:hover .luce { left: 112%; }
+.tasto:hover .play { background: #ffb000; border-color: #ffb000; box-shadow: 0 0 16px rgba(255,176,0,.8); }
+.tasto:hover .play path { fill: #140c02; }
+.tasto.consigliato { border-color: rgba(255,186,60,.7); border-left-color: #ffb000; background: rgba(48,31,8,.84); box-shadow: 0 0 30px -10px rgba(255,176,0,.9), inset 0 0 26px rgba(255,176,0,.08); }
+.tasto.consigliato .dentro { height: 70px; }
+.tasto.consigliato .nome2 { font-size: 25px; color: #ffe7b4; text-shadow: 0 0 14px rgba(255,170,40,.55); }
+.tasto.consigliato .play { width: 46px; height: 46px; background: #ffb000; border-color: #ffb000; box-shadow: 0 0 18px rgba(255,176,0,.7); }
+.tasto.consigliato .play svg { left: 17px; top: 14px; }
+.tasto.consigliato .play path { fill: #140c02; }
+.fx-pieni .tasto.consigliato .play { animation: richiamo 2.6s ease-in-out infinite; }
+@keyframes richiamo { 0%, 100% { box-shadow: 0 0 10px rgba(255,176,0,.5); } 50% { box-shadow: 0 0 26px 3px rgba(255,176,0,.95); } }
+.tasto.inuso { border-left-color: #5dff9a; }
+.tasto.premuto { border-color: #fff; }
+.tasto.premuto .carica { transform: scaleX(1); transition: transform 1.2s linear; }
+.t-cons { color: #ffc24a; } .t-prova { color: #ff9a3d; } .t-uso { color: #5dff9a; }
+.t-prova { animation: pulsa 2.4s ease-in-out infinite; }
+@keyframes pulsa { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+.legami { margin-top: 12px; overflow: hidden; }
+.chip { float: left; height: 32px; padding: 0 11px 0 9px; margin: 0 8px 8px 0; background: rgba(10,7,7,.6); border: 1px solid rgba(255,255,255,.16); cursor: pointer; white-space: nowrap;
+  font: 600 12.5px/30px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 1.8px; text-transform: uppercase; color: #c9c0b4; transition: all .18s ease; }
+.chip svg { display: inline-block; width: 14px; height: 14px; margin: 8px 8px 0 0; vertical-align: top; }
+.chip:hover, .chip.su { color: #ffe1a3; border-color: #ffb000; background: rgba(255,176,0,.13); box-shadow: 0 0 16px -5px rgba(255,176,0,.8); }
+.stato { clear: both; min-height: 24px; margin-top: 6px; font: 600 14.5px/1.4 'Chakra Petch', 'Segoe UI', sans-serif; }
+.stato.pieno { padding: 9px 13px; border-left: 2px solid #ffb000; background: rgba(8,5,5,.72); }
+.fx-pieni .stato.pieno { animation: accendi .45s ease 1; }
+.stato .cur { display: inline-block; width: 8px; height: 15px; margin-left: 6px; vertical-align: -2px; background: #ffb000; animation: allarme .9s steps(1, end) infinite; }
+.stato.ok { color: #5dff9a; border-left-color: #5dff9a; } .stato.ok .cur { background: #5dff9a; }
+.stato.err { color: #ff6578; border-left-color: #ff3b55; background: rgba(40,8,12,.78); } .stato.err .cur { background: #ff3b55; }
+.stato.att { color: #ffc24a; }
+
+/* comparsa "a tubo catodico" dei comandi quando si apre una scheda (solo effetti pieni) */
+@keyframes accendi { 0% { opacity: 0; transform: translateX(-18px); } 30% { opacity: 1; } 42% { opacity: .3; } 56% { opacity: 1; } 100% { opacity: 1; transform: translateX(0); } }
+.fx-pieni .scheda.aperta .uso { animation: accendi .5s ease .34s backwards; }
+.fx-pieni .scheda.aperta .capo { animation: accendi .5s ease .4s backwards; }
+.fx-pieni .scheda.aperta .tasto { animation: accendi .5s ease .46s backwards; }
+.fx-pieni .scheda.aperta .tasto:nth-child(2) { animation-delay: .53s; }
+.fx-pieni .scheda.aperta .tasto:nth-child(3) { animation-delay: .6s; }
+.fx-pieni .scheda.aperta .tasto:nth-child(4) { animation-delay: .67s; }
+.fx-pieni .scheda.aperta .tasto:nth-child(5) { animation-delay: .74s; }
+.fx-pieni .scheda.aperta .tasto:nth-child(6) { animation-delay: .81s; }
+.fx-pieni .scheda.aperta .tasto:nth-child(7) { animation-delay: .88s; }
+.fx-pieni .scheda.aperta .tasto:nth-child(8) { animation-delay: .95s; }
+.fx-pieni .scheda.aperta .legami { animation: accendi .5s ease .95s backwards; }
+.fx-pieni .scheda.aperta .chiudi { animation: appare .5s ease .6s backwards; }
+.fx-pieni .scheda.gia .uso, .fx-pieni .scheda.gia .capo, .fx-pieni .scheda.gia .tasto, .fx-pieni .scheda.gia .legami, .fx-pieni .scheda.gia .chiudi { animation: none; }
+.fx-pieni .scheda.gia .tasto.consigliato .play { animation: richiamo 2.6s ease-in-out infinite; }
+
+/* ---------- cassetti a richiesta: recenti, note, guida ---------- */
+.cassetto { display: none; position: absolute; right: 22px; top: 66px; bottom: 20px; width: 470px; background: rgba(10,7,7,.93); border: 1px solid rgba(255,255,255,.16); border-left: 2px solid #ffb000; box-shadow: 0 20px 60px -10px rgba(0,0,0,.9); cursor: default; }
+.cassetto.entra { animation: cassetto .42s cubic-bezier(.2,.8,.2,1) 1; }
+@keyframes cassetto { 0% { opacity: 0; transform: translateX(34px); } 100% { opacity: 1; transform: translateX(0); } }
+.ctesta { position: absolute; left: 0; right: 0; top: 0; height: 46px; padding: 0 12px 0 18px; border-bottom: 1px solid rgba(255,255,255,.1); background: linear-gradient(180deg, rgba(255,176,0,.1), rgba(255,176,0,0)); }
+.ctesta span { display: block; margin-right: 44px; font: 700 14.5px/46px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 3px; text-transform: uppercase; color: #ffd98a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cx { position: absolute; right: 8px; top: 8px; width: 30px; height: 30px; padding: 0; background: transparent; border: 1px solid rgba(255,255,255,.18); cursor: pointer; transition: all .18s ease; }
+.cx svg { display: block; width: 11px; height: 11px; margin: 0 auto; }
+.cx:hover { border-color: #ffb000; background: rgba(255,176,0,.16); }
+.ccorpo { position: absolute; left: 0; right: 0; top: 46px; bottom: 0; overflow-y: auto; overflow-x: hidden; padding: 12px 18px 18px; font: 400 13.5px/1.5 'Chakra Petch', 'Segoe UI', sans-serif; color: #cfc6ba; }
+.ccorpo, .colonna { scrollbar-face-color: #4a3716; scrollbar-track-color: #0c0909; scrollbar-arrow-color: #c08a2a; scrollbar-shadow-color: #0c0909; scrollbar-highlight-color: #0c0909; scrollbar-3dlight-color: #0c0909; scrollbar-darkshadow-color: #0c0909; }
+.ccorpo::-webkit-scrollbar, .colonna::-webkit-scrollbar { width: 9px; }
+.ccorpo::-webkit-scrollbar-track, .colonna::-webkit-scrollbar-track { background: #0c0909; }
+.ccorpo::-webkit-scrollbar-thumb, .colonna::-webkit-scrollbar-thumb { background: #4a3716; }
+.ccorpo h4 { margin: 18px 0 8px; font: 600 11.5px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 3.4px; text-transform: uppercase; color: #c9a45a; }
+.ccorpo h4:first-child { margin-top: 4px; }
+.crono div { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.crono .q { font: 400 12px/1 'JetBrains Mono', Consolas, monospace; color: #8a8178; margin-right: 10px; }
+.crono .n { font: 700 15px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 1.2px; color: #fff; margin-right: 8px; }
+.crono .x { color: #9c9288; }
+.crono .primo .n { color: #5dff9a; }
+.prof { margin-bottom: 11px; }
+.prof b { font: 700 15.5px/1.2 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 1.4px; color: #fff; }
+.voce { color: #9c9288; }
+.regola { position: relative; padding-left: 16px; margin: 5px 0; }
+.regola i { position: absolute; left: 1px; top: 8px; width: 5px; height: 5px; background: #ffb000; transform: rotate(45deg); }
+.provar { position: relative; padding-left: 18px; margin: 5px 0; }
+.provar i { position: absolute; left: 0; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: #6f675f; }
+.provar.p-ok i { background: #5dff9a; box-shadow: 0 0 8px rgba(93,255,154,.8); }
+.provar.p-prova i { background: #ffb000; box-shadow: 0 0 8px rgba(255,176,0,.8); animation: allarme 1.4s steps(1, end) infinite; }
+.provar.p-no { color: #ff8a98; } .provar.p-no i { background: #ff3b55; box-shadow: 0 0 8px rgba(255,59,85,.8); }
+.tappa { margin: 8px 0; }
+.tappa .q { font: 400 11.5px/1 'JetBrains Mono', Consolas, monospace; color: #8a8178; margin-right: 8px; }
+.tappa .t { font: 700 11.5px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 1.8px; margin-right: 8px; }
+.problema { color: #ff5468; } .cura { color: #ffc94d; } .tok { color: #5dff9a; } .prova { color: #ff9a3d; } .tentativo { color: #c9c2b8; } .nota { color: #8a8178; }
+.gtitolo { font: 600 15px/1.35 'Chakra Petch', 'Segoe UI', sans-serif; color: #f2ece2; margin: 2px 0 14px; }
+.passi { margin: 0; padding: 0 0 0 4px; list-style: none; }
+.passi li { position: relative; padding: 0 0 0 38px; margin: 0 0 11px; min-height: 26px; }
+.passi li b { position: absolute; left: 0; top: -1px; width: 26px; height: 26px; border: 1px solid rgba(255,255,255,.28); text-align: center; font: 700 14px/24px 'Rajdhani', 'Segoe UI', sans-serif; color: #ffd98a; }
+.cassetto.accesa { border-color: rgba(93,255,154,.55); border-left-color: #5dff9a; background: rgba(6,16,10,.94); box-shadow: 0 20px 60px -10px rgba(0,0,0,.9), 0 0 40px -10px rgba(93,255,154,.6); }
+.cassetto.accesa .ctesta { background: linear-gradient(180deg, rgba(93,255,154,.14), rgba(93,255,154,0)); }
+.cassetto.accesa .ctesta span { color: #8dffb8; }
+.cassetto.accesa .passi li b { border-color: rgba(93,255,154,.6); color: #8dffb8; }
+/* spiegazioni semplici dei tasti: in fondo alla Guida (gspiega) e in cima ai dettagli di un profilo (dt-s) */
+.gspiega { margin: 16px 0 0; padding: 11px 13px 10px; border: 1px solid rgba(255,255,255,.12); border-left: 2px solid #ffb000; background: rgba(255,176,0,.05); }
+.gspiega b { display: block; margin: 0 0 5px; font: 700 13px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 2px; text-transform: uppercase; color: #ffd98a; }
+.gspiega span { display: block; font: 400 13.5px/1.45 'Chakra Petch', 'Segoe UI', sans-serif; color: #d8cfc4; }
+.dt-s { margin: 0 0 8px; padding: 0 0 8px; border-bottom: 1px solid rgba(255,176,0,.2); font: 400 13px/1.45 'Chakra Petch', 'Segoe UI', sans-serif; color: #efe6d8; }
+
+/* ---------- impostazioni: ingranaggio flottante + pannello ---------- */
+#ingranaggio { position: absolute; right: 20px; bottom: 12px; width: 64px; height: 64px; z-index: 9; cursor: pointer; }
+#ingranaggio .gl { position: absolute; left: 9px; top: 9px; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle, rgba(224,38,60,.5), rgba(12,6,6,.92) 68%); box-shadow: 0 0 20px 1px rgba(224,38,60,.5); transition: box-shadow .3s ease; }
+#ingranaggio .lento, #ingranaggio .d1, #ingranaggio .d2, #ingranaggio .mz { position: absolute; left: 0; top: 0; width: 64px; height: 64px; }
+#ingranaggio svg { display: block; width: 64px; height: 64px; }
+.fx-pieni #ingranaggio .lento { animation: gira 70s linear infinite; }
+#ingranaggio .d1 { transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+#ingranaggio .d2 { opacity: 0; transform: rotate(22.5deg) scale(.8); transition: transform .8s cubic-bezier(.2,.9,.3,1.25), opacity .35s ease; }
+#ingranaggio .mz { transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+#ingranaggio:hover .gl { box-shadow: 0 0 30px 5px rgba(224,38,60,.8); }
+#ingranaggio:hover .d1 { transform: rotate(45deg); }
+#ingranaggio:hover .mz { transform: rotate(-60deg); }
+#ingranaggio.aperto .gl { box-shadow: 0 0 34px 7px rgba(255,150,40,.85); }
+#ingranaggio.aperto .d1 { transform: rotate(225deg) scale(.9); }
+#ingranaggio.aperto .d2 { opacity: 1; transform: rotate(-112.5deg) scale(1.12); }
+#ingranaggio.aperto .mz { transform: rotate(-180deg); }
+#imp { display: none; position: absolute; right: 22px; bottom: 90px; width: 392px; z-index: 9; transform-origin: 100% 100%; }
+#imp.aperto { display: block; }
+.fx-pieni #imp.aperto, .fx-ridotti #imp.aperto { animation: sboccia .44s cubic-bezier(.2,.9,.25,1.1) 1; }
+@keyframes sboccia { 0% { opacity: 0; transform: translateY(20px) scale(.7, .25); } 55% { opacity: 1; } 100% { opacity: 1; transform: translateY(0) scale(1, 1); } }
+.imp-in { position: relative; padding: 16px 20px 18px; background: rgba(13,9,9,.97); border: 1px solid rgba(255,255,255,.16); border-top: 2px solid #e0263c; box-shadow: 0 26px 70px -8px rgba(0,0,0,.95), 0 0 50px -14px rgba(224,38,60,.7); }
+.imp-in .ang { border-color: #e0263c; }
+.imp-in .ang.a1 { left: 6px; top: 8px; width: 14px; height: 14px; }
+.imp-in .ang.a2 { right: 6px; bottom: 6px; width: 14px; height: 14px; }
+.imp-t { font: 600 12px/1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 5px; text-transform: uppercase; color: #ff8a98; margin: 2px 0 14px 12px; white-space: nowrap; }
+.voceimp { padding: 13px 0 4px; border-top: 1px solid rgba(255,255,255,.09); }
+.voceimp .ti { font: 700 18px/1.1 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 1.8px; text-transform: uppercase; color: #f6ead6; }
+.voceimp .de { font: 400 13px/1.35 'Chakra Petch', 'Segoe UI', sans-serif; color: #9c9288; margin: 4px 0 11px; }
+.seg { display: flex; }
+.seg button { flex: 1 1 0%; position: relative; height: 40px; padding: 0; margin-left: -1px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.16); cursor: pointer;
+  font: 600 13.5px/38px 'Rajdhani', 'Segoe UI', sans-serif; letter-spacing: 2.6px; text-transform: uppercase; color: #b9b0a6; transition: all .2s ease; }
+.seg button:first-child { margin-left: 0; }
+.seg button:hover { color: #fff; border-color: rgba(255,255,255,.4); z-index: 1; }
+.seg button.on { z-index: 2; color: #ffe9bd; border-color: rgba(255,186,60,.9); background: rgba(255,170,40,.2); text-shadow: 0 0 10px rgba(255,170,40,.8); box-shadow: inset 0 -2px 0 #ffb000, 0 0 20px -6px rgba(255,170,40,.95); }
+.fx-pieni #imp.aperto .voceimp { animation: accendi .45s ease .2s backwards; }
+
+/* ---------- livelli di effetti ---------- */
+/* in pausa (finestra non in primo piano, gioco appena avviato, nessuno al PC): si fermano i movimenti continui; le comparse brevi finiscono */
+.ferma .img, .ferma .trama, .ferma .galla, .ferma .base, .ferma .sigillo .an, .ferma .sigillo .cuore, .ferma .filo i, .ferma .led, .ferma .orologio b i, .ferma .t-prova,
+.ferma .stato .cur, .ferma .tasto.consigliato .play, .ferma .provar i, .ferma #ingranaggio .lento { animation-play-state: paused !important; }
+.fx-ridotti .sigillo .an, .fx-ridotti .sigillo .cuore, .fx-ridotti .filo i, .fx-ridotti .orologio b i { animation: none; }
+.fx-ridotti .filo i { display: none; }
+.fx-ridotti .mono, .fx-ridotti .scheda, .fx-ridotti .pos, .fx-ridotti .logo { transition-duration: .3s; }
+.fx-ridotti .par { transition: none; }
+.fx-spenti * { animation: none !important; transition: none !important; }
+.fx-spenti .filo i { display: none; }
+.fx-spenti #braci, .fx-ridotti #braci { display: none; }
+
+/* messaggio se manca giochi.js */
+.guaio { position: absolute; left: 40px; top: 120px; right: 40px; padding: 18px 22px; border: 1px solid #ff3b55; border-left-width: 3px; background: rgba(40,8,12,.8); color: #ffd3d8; font-size: 17px; z-index: 6; }
+
+/* ---------- dettagli tecnici di un profilo (freccina accanto al tasto, 23/11) ---------- */
+.prof-riga { position: relative; margin: 0 0 8px; }
+.prof-riga .tasto { margin: 0; }
+.freccina { position: absolute; right: 3px; bottom: 2px; z-index: 3; width: 20px; height: 16px; padding: 0; cursor: pointer;
+  background: none; border: 0; opacity: .45; transition: opacity .18s ease; }
+.freccina span { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -5px 0 0 -3px;
+  border-right: 1.5px solid #c9bfb3; border-bottom: 1.5px solid #c9bfb3; transform: rotate(45deg); transition: transform .3s cubic-bezier(.2,.9,.25,1.15), margin .3s ease, border-color .18s ease; }
+.freccina:hover { opacity: 1; }
+.freccina:hover span { border-color: #ffb000; }
+.freccina.su { opacity: .9; }
+.freccina.su span { transform: rotate(225deg); margin-top: -1px; border-color: #ffb000; }
+.dett-tec { max-height: 0; overflow: hidden; opacity: 0; margin: 0; transition: max-height .4s ease, opacity .3s ease, margin .3s ease; }
+.dett-tec.aperto { max-height: 420px; opacity: 1; margin: -2px 0 10px; }
+.dt-in { border: 1px solid rgba(255,176,0,.28); border-left: 3px solid #ffb000; background: rgba(12,8,6,.9); padding: 10px 14px 8px;
+  font: 500 13.5px/1.35 'Rajdhani', 'Segoe UI', sans-serif; color: #d8cfc4; }
+.dt-r { display: flex; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.dt-r:last-of-type { border-bottom: 0; }
+.dt-k { flex: 0 0 42%; color: #a99f94; letter-spacing: .4px; padding-right: 10px; }
+.dt-v { flex: 1 1 auto; color: #f2ece2; }
+.dt-p { margin-top: 7px; padding-top: 6px; border-top: 1px solid rgba(255,176,0,.2); font-family: 'JetBrains Mono', Consolas, monospace; font-size: 11.5px; color: #c9a45c; }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it" class="fx-pieni">
+<head>
+<meta charset="utf-8">
+<title>BEST</title>
+<link rel="icon" href="best.ico">
+<style>html, body { background: #050304; }</style>
+<link rel="stylesheet" href="ui/best.css">
+</head>
+<body>
+<!-- Grafica: ui/best.css (aspetto) e ui/best.js (disegno, movimenti, impostazioni). Dati: giochi.js. Qui sotto resta il motore: lettura dei file e avvio del gioco. -->
+<canvas id="fondo"></canvas>
+<div id="ambiente"><div id="ambA"></div><div id="ambB"></div></div>
+
+<div id="testata">
+  <div class="marchio">
+    <div class="sigillo">
+      <div class="an an1"><svg viewBox="0 0 100 100" width="54" height="54"><circle cx="50" cy="50" r="46" fill="none" stroke="#ffb000" stroke-opacity=".8" stroke-width="1.6" stroke-dasharray="2 5.23"/><path d="M50 0 L53.5 8 L46.5 8 Z" fill="#ffb000"/></svg></div>
+      <div class="an an2"><svg viewBox="0 0 100 100" width="54" height="54"><circle cx="50" cy="50" r="35" fill="none" stroke="#e0263c" stroke-width="3.4" stroke-dasharray="42 12 9 12 64 28 14 39"/></svg></div>
+      <div class="an"><svg viewBox="0 0 100 100" width="54" height="54"><circle cx="50" cy="50" r="24" fill="none" stroke="#ffffff" stroke-opacity=".24" stroke-width="1"/></svg></div>
+      <div class="cuore"></div>
+    </div>
+    <div class="nome" id="nome">BEST</div>
+  </div>
+  <div class="filo"><b class="f1"></b><b class="f2"></b><i></i></div>
+  <div class="orologio"><b id="ora"></b><span id="data"></span></div>
+</div>
+
+<div id="vis"></div>
+<canvas id="braci"></canvas>
+<div id="giochi"></div>
+
+<div id="piede"></div>
+<div id="imp"></div>
+<div id="ingranaggio" title="Impostazioni" onclick="apriImpostazioni()"><div class="gl"></div><div class="d2" id="ing-d2"></div><div class="lento"><div class="d1" id="ing-d1"></div></div><div class="mz" id="ing-mz"></div></div>
+
+<div id="vignetta"></div>
+<div id="righe"></div>
+<div id="sipario"><i></i></div>
+
+<script src="giochi.js" charset="utf-8"></script>
+<script src="ui/motore_chrome.js" charset="utf-8"></script>
+<script src="ui/best.js" charset="utf-8"></script>
+</body>
+</html>

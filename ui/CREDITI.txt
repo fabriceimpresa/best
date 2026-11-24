@@ -1,0 +1,41 @@
+BEST - crediti e licenze di quello che sta nella cartella ui\ e delle immagini delle schede
+(scritto il 23/11/2026 con la nuova grafica)
+
+=== FONT (cartella ui\fonts) ===
+Scaricati il 23/11/2026 da Google Fonts (fonts.google.com), in formato WOFF.
+Tutti con licenza SIL Open Font License 1.1 (OFL): uso libero, anche commerciale; il testo completo di ogni licenza e' in ui\fonts\licenze\.
+
+- Grenze Gotisch 700 ............ GrenzeGotisch-700.woff
+  Autori: The Grenze Gotisch Project Authors (Omnibus-Type) - https://github.com/Omnibus-Type/Grenze-Gotisch
+  Dove si vede: solo la scritta "BEST" in alto (il tocco gotico).
+- Rajdhani 500 / 600 / 700 ...... Rajdhani-500.woff, Rajdhani-600.woff, Rajdhani-700.woff
+  Autori: Indian Type Foundry
+  Dove si vede: nomi dei profili, tasti, etichette (lo stesso font delle app CASA e PROTOTYPE).
+- Chakra Petch 400 / 600 ........ ChakraPetch-400.woff, ChakraPetch-600.woff
+  Autori: The Chakra Petch Project Authors (Cadson Demak) - https://github.com/m4rc1e/Chakra-Petch
+  Dove si vede: testi lunghi (note, guida, messaggi).
+- JetBrains Mono 400 ............ JetBrainsMono-400.woff
+  Autori: The JetBrains Mono Project Authors - https://github.com/JetBrains/JetBrainsMono
+  Dove si vede: orologio, date, numeri.
+
+=== IMMAGINI DEI GIOCHI (cartella giochi\<gioco>) ===
+sfondo.jpg e logo.png di ogni gioco sono copie delle immagini che Steam tiene gia' su questo PC
+(C:\Program Files (x86)\Steam\appcache\librarycache\<AppID>\...: library_hero.jpg e logo.png; il logo e' stato solo ritagliato togliendo il bordo vuoto).
+- Call of Duty (AppID 1938090): immagini di Activision.
+- Gears of War: E-Day (AppID 3010850): immagini di Xbox Game Studios / The Coalition.
+Appartengono ai rispettivi editori: qui servono solo a riconoscere le schede dentro BEST, su questo PC. Non vanno pubblicate ne' date ad altri.
+Anche copertina.jpg (gia' presente prima) viene dalla stessa cartella di Steam (library_capsule.jpg).
+
+=== DISEGNI FATTI APPOSTA (nessun file esterno) ===
+- Ingranaggio delle impostazioni, anelli vicino a "BEST", icone dei tasti: disegnati in SVG dentro index.html e ui\best.js (originali, non copiati da loghi).
+- Braci, luci, pavimento a griglia, righe da monitor: disegnati dal codice (canvas e CSS), nessuna immagine o texture scaricata.
+
+=== ISPIRAZIONE ===
+Struttura e movimenti presi dallo stile delle app di Fabrice CASA (tema neon HUD) e PROTOTYPE, rifatti con altri colori
+(nero, oro/ambra, cremisi, acciaio; niente blu). Nessun file copiato da quelle cartelle.
+
+=== FILE DELLA CARTELLA ui ===
+best.css ......... aspetto (colori, forme, animazioni)
+best.js .......... disegno delle schede, movimenti, impostazioni
+preferenze.txt ... nasce la prima volta che cambi "Interfaccia viva" dall'ingranaggio (una riga: effetti=pieni|ridotti|spenti). Si puo' cancellare: torna "pieni".
+errori.txt ....... nasce solo se qualcosa va storto: e' da far leggere a Claude.

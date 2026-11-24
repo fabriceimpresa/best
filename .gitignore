@@ -1,0 +1,11 @@
+# BEST: nel repository va SOLO l'app (uguale su PC e Mac).
+# I giochi e il diario restano in locale su ogni computer.
+giochi.js
+giochi/
+PROGETTO.md
+MAC_LEGGIMI.md
+ui/preferenze.txt
+ui/errori.txt
+*.bak
+.playwright-mcp/
+.DS_Store
